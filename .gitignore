@@ -1,5 +1,4 @@
 *node_modules
 *.env
-*certificateModel.js
 *projectModel.js
 *projectController.js

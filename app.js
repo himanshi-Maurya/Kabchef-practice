@@ -8,8 +8,9 @@ const jwt = require('jsonwebtoken');
 const User = require('./models/userModel');
 const userRoutes = require('./routes/userRoute.js');
 const articleRoutes = require('./routes/articleRoute.js');
+const certiRoutes = require('./routes/certiRoute.js');
 
-const dbString = process.env.DATABASE ;
+const dbString = 'mongodb://localhost:27017/testing' ;
 
 
 mongoose
@@ -42,7 +43,7 @@ app.use(async (req, res, next) => {
       res.locals.loggedInUser = await User.findById(userId);
       next();
     } catch (error) {
-      next(error);
+      next(error.name);
     }
   } else {
     next();
@@ -51,6 +52,7 @@ app.use(async (req, res, next) => {
 
 app.use('/', userRoutes);
 app.use('/', articleRoutes);
+app.use('/', certiRoutes);
 //PORT
 const PORT = process.env.PORT || 8000;
 
